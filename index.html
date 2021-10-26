@@ -211,6 +211,19 @@ function validatePhoneNumber(input_str) {
     return re.test(input_str);
 }
 
+//Count how many digits in number
+function digitsCount(n) {
+  var count = 0;
+  if (n >= 1) ++count;
+
+  while (n / 10 >= 1) {
+    n /= 10;
+    ++count;
+  }
+
+  return count;
+}
+
 //Error messages
 var lnError, phoneError, itemError, streetError, cityError; 
 
@@ -238,7 +251,7 @@ function validateDisplay() {
 	//Validate phone number + display error message
 	let p = $('[name="phone"]').val();
 
-	if (p == "" || (validatePhoneNumber(p)) == false) {
+	if (p == "" || (validatePhoneNumber(p)) == false || digitsCount(p) != 10) {
 		phoneError = "Phone number not valid";
 	}
 	else {
